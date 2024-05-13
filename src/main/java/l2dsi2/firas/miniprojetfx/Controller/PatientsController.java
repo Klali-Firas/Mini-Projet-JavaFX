@@ -47,6 +47,9 @@ public class PatientsController implements Initializable {
             TableRow<Patient> row = new TableRow<>();
             ContextMenu contextMenu = new ContextMenu();
 
+            final MenuItem medicamentsItem = getMedicamentsItem(row);
+            contextMenu.getItems().add(medicamentsItem);
+
             MenuItem updateItem = new MenuItem("Update");
             updateItem.setOnAction(event -> {
                 openUpdateDialog(row.getItem());
@@ -97,6 +100,23 @@ public class PatientsController implements Initializable {
                 e.printStackTrace();
             }
         });
+    }
+
+    private MenuItem getMedicamentsItem(TableRow<Patient> row) {
+        MenuItem medicamentsItem = new MenuItem("Medicaments");
+        medicamentsItem.setOnAction(event -> {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/l2dsi2/firas/miniprojetfx/Medicaments.fxml"));
+                Scene scene = new Scene(fxmlLoader.load()); // Load the scene first
+                MedicamentsController medicamentsController = fxmlLoader.getController(); // Then get the controller
+                medicamentsController.setPatient(row.getItem()); // set the patient
+                Stage stage = (Stage) patientsTable.getScene().getWindow();
+                stage.setScene(scene);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        return medicamentsItem;
     }
 
     private void openUpdateDialog(Patient patient) {
