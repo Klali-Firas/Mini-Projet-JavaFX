@@ -1,0 +1,35 @@
+.material-pane {
+    -fx-background-color: #E0E0E0; /* Light gray color */
+}
+
+.material-button {
+    -fx-background-color: #3F51B5; /* Indigo color */
+    -fx-text-fill: white; /* White text */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 10, 0, 0, 4); /* Shadow effect */
+    -fx-padding: 10px 20px; /* Padding around text */
+    -fx-border-radius: 5px; /* Rounded corners */
+    -fx-background-radius: 5px; /* Rounded corners */
+}
+
+.material-label {
+    -fx-text-fill: #3F51B5; /* Indigo color */
+}
+
+.material-input {
+    -fx-background-color: white; /* White color */
+    -fx-border-color: #3F51B5; /* Indigo color */
+    -fx-border-radius: 5px; /* Rounded corners */
+    -fx-background-radius: 5px; /* Rounded corners */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 10, 0, 0, 4); /* Shadow effect */
+}
+
+
+
+
+.material-table {
+    -fx-background-color: white; /* White color */
+    -fx-border-color: #3F51B5; /* Indigo color */
+    -fx-border-radius: 5px; /* Rounded corners */
+    -fx-background-radius: 5px; /* Rounded corners */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 10, 0, 0, 4); /* Shadow effect */
+}

@@ -52,7 +52,7 @@ public class PatientDao {
             java.sql.PreparedStatement ps = con.prepareStatement("select * from patient");
             java.sql.ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                patients.add(new Patient(rs.getInt("id"),  rs.getString("nom"), rs.getString("prenom"), rs.getInt("telephone"), rs.getDate("birthday")));
+                patients.add(new Patient(rs.getInt("id"), rs.getString("nom"), rs.getString("prenom"), rs.getInt("telephone"), rs.getDate("birthday")));
             }
         } catch (java.sql.SQLException e) {
             e.printStackTrace();

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class PatientMedicamentDAO {
     static Connection con = Connexion.connect();
 
-    
+
     public static void addPatientMedicament(PatientMedicament patientMedicament) {
         try {
 
@@ -31,7 +31,7 @@ public class PatientMedicamentDAO {
             ps.executeUpdate();
 
             //add patient medicament
-             ps = con.prepareStatement("insert into patient_medicament (id_patient, id_medicament, qte) values (?, ?, ?)");
+            ps = con.prepareStatement("insert into patient_medicament (id_patient, id_medicament, qte) values (?, ?, ?)");
             ps.setInt(1, patientMedicament.getId_patient());
             ps.setInt(2, patientMedicament.getId_medicament());
             ps.setInt(3, patientMedicament.getQte());
@@ -42,7 +42,7 @@ public class PatientMedicamentDAO {
             throw new RuntimeException(e);
         }
     }
-    
+
     public static void updatePatientMedicament(PatientMedicament patientMedicament) {
         try {
             java.sql.PreparedStatement ps = con.prepareStatement("update patient_medicament set id_patient = ?, id_medicament = ?, qte = ? where id = ?");
@@ -55,7 +55,7 @@ public class PatientMedicamentDAO {
             e.printStackTrace();
         }
     }
-    
+
     public static void deletePatientMedicament(Integer id) {
         try {
             java.sql.PreparedStatement ps = con.prepareStatement("delete from patient_medicament where id = ?");
@@ -65,18 +65,15 @@ public class PatientMedicamentDAO {
             e.printStackTrace();
         }
     }
-    
-    
-    
-    
-    
+
+
     public static ArrayList<PatientMedicament> getAllPatientMedicaments() {
         ArrayList<PatientMedicament> patientMedicaments = new ArrayList<>();
         try {
             java.sql.PreparedStatement ps = con.prepareStatement("select * from patient_medicament");
             java.sql.ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                patientMedicaments.add(new PatientMedicament(rs.getInt("id"), rs.getInt("id_patient"), rs.getInt("id_medicament"), rs.getInt("qte")));
+                patientMedicaments.add(new PatientMedicament(rs.getInt("id"), rs.getInt("id_patient"), rs.getInt("id_medicament"), rs.getInt("qte"), rs.getTimestamp("date_achat")));
             }
         } catch (java.sql.SQLException e) {
             e.printStackTrace();
@@ -91,7 +88,7 @@ public class PatientMedicamentDAO {
             ps.setInt(1, id);
             java.sql.ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                patientMedicament = new PatientMedicament(rs.getInt("id"), rs.getInt("id_patient"), rs.getInt("id_medicament"), rs.getInt("qte"));
+                patientMedicament = new PatientMedicament(rs.getInt("id"), rs.getInt("id_patient"), rs.getInt("id_medicament"), rs.getInt("qte"), rs.getTimestamp("date_achat"));
             }
         } catch (java.sql.SQLException e) {
             e.printStackTrace();
@@ -107,7 +104,7 @@ public class PatientMedicamentDAO {
             ps.setInt(1, id);
             java.sql.ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                patientMedicaments.add(new PatientMedicament(rs.getInt("id"), rs.getInt("id_patient"), rs.getInt("id_medicament"), rs.getInt("qte")));
+                patientMedicaments.add(new PatientMedicament(rs.getInt("id"), rs.getInt("id_patient"), rs.getInt("id_medicament"), rs.getInt("qte"), rs.getTimestamp("date_achat")));
             }
         } catch (java.sql.SQLException e) {
             e.printStackTrace();
@@ -116,7 +113,7 @@ public class PatientMedicamentDAO {
     }
 
     public static void main(String[] args) {
-        PatientMedicament patientMedicament = new PatientMedicament(1, 1, 2, 3);
+        PatientMedicament patientMedicament = new PatientMedicament(1, 1, 2, 3,null);
         PatientMedicamentDAO.addPatientMedicament(patientMedicament);
         System.out.println(PatientMedicamentDAO.getAllPatientMedicaments());
     }

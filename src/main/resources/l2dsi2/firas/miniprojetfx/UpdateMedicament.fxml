@@ -2,13 +2,13 @@
 
 <?import java.net.URL?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="material-pane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="l2dsi2.firas.miniprojetfx.Controller.AddPatientController">
+<?import javafx.scene.control.ComboBox?>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="material-pane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="l2dsi2.firas.miniprojetfx.Controller.UpdateMedicamentController">
     <stylesheets>
         <URL value="@styles.css" />
     </stylesheets>
@@ -18,22 +18,24 @@
                 <Font size="16.0" />
             </font>
         </TextField>
-        <TextField fx:id="prenomInput" layoutX="200.0" layoutY="113.0" styleClass="material-input">
+        <TextField fx:id="qteInput" layoutX="200.0" layoutY="113.0" styleClass="material-input">
             <font>
                 <Font size="16.0" />
             </font>
         </TextField>
-        <TextField fx:id="telInput" layoutX="200.0" layoutY="181.0" styleClass="material-input">
+        <TextField fx:id="prixInput" layoutX="200.0" layoutY="181.0" styleClass="material-input">
             <font>
                 <Font size="16.0" />
             </font>
         </TextField>
+        <ComboBox fx:id="typeInput" layoutX="200.0" layoutY="246.0" styleClass="material-input">
+
+        </ComboBox>
         <Label layoutX="200.0" layoutY="32.0" styleClass="material-label" text="Nom" />
-        <Label layoutX="200.0" layoutY="96.0" styleClass="material-label" text="Prenom" />
-        <Label layoutX="200.0" layoutY="165.0" styleClass="material-label" text="Telephone" />
-        <Label layoutX="200.0" layoutY="228.0" styleClass="material-label" text="Birthday" />
-        <DatePicker fx:id="birthdayInput" layoutX="200.0" layoutY="246.0" prefHeight="37.0" prefWidth="199.0" styleClass="material-input" />
-        <Button fx:id="add" layoutX="200.0" layoutY="317.0" mnemonicParsing="false" styleClass="material-button" text="Add">
+        <Label layoutX="200.0" layoutY="96.0" styleClass="material-label" text="Quantité" />
+        <Label layoutX="200.0" layoutY="165.0" styleClass="material-label" text="Prix" />
+        <Label layoutX="200.0" layoutY="228.0" styleClass="material-label" text="Type" />
+        <Button fx:id="update" layoutX="200.0" layoutY="317.0" mnemonicParsing="false" styleClass="material-button" text="Update">
             <font>
                 <Font size="14.0" />
             </font>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="l2dsi2.firas.miniprojetfx.Controller.AddMedToPatientController">
+   <stylesheets>
+      <URL value="@styles.css" />
+   </stylesheets>
+   <children>
+      <ComboBox fx:id="patient" layoutX="192.0" layoutY="76.0" prefHeight="26.0" prefWidth="215.0" styleClass="material-input" />
+      <ComboBox fx:id="medicament" layoutX="192.0" layoutY="142.0" prefHeight="26.0" prefWidth="215.0" styleClass="material-input" />
+      <TextField fx:id="qte" layoutX="192.0" layoutY="200.0" prefHeight="26.0" prefWidth="215.0" styleClass="material-input" />
+      <TextField fx:id="prixTotal" layoutX="192.0" layoutY="253.0" prefHeight="26.0" prefWidth="215.0" styleClass="material-input" />
+      <Label layoutX="192.0" layoutY="50.0" styleClass="material-label" text="Patient">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="192.0" layoutY="116.0" styleClass="material-label" text="Medicament" />
+      <Label layoutX="192.0" layoutY="183.0" styleClass="material-label" text="Quantite" />
+      <Label layoutX="192.0" layoutY="236.0" styleClass="material-label" text="Prix Total" />
+      <Button fx:id="ajouter" layoutX="195.0" layoutY="300.0" mnemonicParsing="false" styleClass="material-button" text="Ajouter" />
+      <Button fx:id="annuler" layoutX="325.0" layoutY="300.0" mnemonicParsing="false" styleClass="material-button" text="Annuler" />
+   </children>
+</AnchorPane>

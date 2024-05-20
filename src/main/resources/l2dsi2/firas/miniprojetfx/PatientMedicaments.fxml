@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="material-pane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="l2dsi2.firas.miniprojetfx.Controller.PatientMedicamentsController">
+    <stylesheets>
+        <URL value="@styles.css" />
+    </stylesheets>
+    <children>
+        <Label fx:id="patientLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="124.0" layoutY="47.0" prefHeight="35.0" prefWidth="352.0" styleClass="material-label" text="Firas Klali : 54218262" textAlignment="CENTER">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Label>
+        <TableView fx:id="tableMed" layoutX="23.0" layoutY="82.0" prefHeight="278.0" prefWidth="553.0" styleClass="material-table">
+            <columns>
+                <TableColumn fx:id="nomCol" prefWidth="92.00003051757812" styleClass="material-column" text="Nom" />
+                <TableColumn fx:id="TypeCol" prefWidth="105.5999755859375" styleClass="material-column" text="Type" />
+                <TableColumn fx:id="qteCol" prefWidth="96.79998779296875" styleClass="material-column" text="Quantite" />
+                <TableColumn fx:id="prixCol" prefWidth="86.39996337890625" styleClass="material-column" text="Prix" />
+            <TableColumn fx:id="dateAchatCol" prefWidth="173.60003662109375" text="Date Achat" />
+            </columns>
+        </TableView>
+        <Button fx:id="back" layoutX="504.0" layoutY="12.0" mnemonicParsing="false" styleClass="material-button" text="Retour">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Button>
+      <Button fx:id="addMed" layoutX="15.0" layoutY="12.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="114.0" styleClass="material-button" text="Ajouter Medicament">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+    </children>
+</AnchorPane>

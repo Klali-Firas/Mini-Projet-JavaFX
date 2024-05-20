@@ -1,19 +1,17 @@
 package l2dsi2.firas.miniprojetfx.Controller;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import l2dsi2.firas.miniprojetfx.DAO.PatientDao;
 import l2dsi2.firas.miniprojetfx.Model.Patient;
 
-import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class AddPatientController implements Initializable {
@@ -39,11 +37,26 @@ public class AddPatientController implements Initializable {
     }
 
     private void handleAdd() {
+        String nom = nomInput.getText();
+        String prenom = prenomInput.getText();
+        String tel = telInput.getText();
+        LocalDate birthday = birthdayInput.getValue();
+
+        // Check if any field is empty
+        if (nom.isEmpty() || prenom.isEmpty() || tel.isEmpty() || birthday == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("All fields must be filled");
+            alert.showAndWait();
+            return;
+        }
+
         patient = new Patient();
-        patient.setNom(nomInput.getText());
-        patient.setPrenom(prenomInput.getText());
-        patient.setTelephone(Integer.parseInt(telInput.getText()));
-        patient.setBirthday(java.sql.Date.valueOf(birthdayInput.getValue()));
+        patient.setNom(nom);
+        patient.setPrenom(prenom);
+        patient.setTelephone(Integer.parseInt(tel));
+        patient.setBirthday(java.sql.Date.valueOf(birthday));
         PatientDao.addPatient(patient);
         Stage stage = (Stage) cancel.getScene().getWindow();
         stage.close();

@@ -8,15 +8,10 @@ public class Medicament {
     private String description;
     private TypeMedicament type;
 
-    public enum TypeMedicament {
-        SPECIAL,
-        NORMAL
-    }
-
     public Medicament() {
     }
 
-    public Medicament(Integer id,String nom, double prix, int qteStock, String description, TypeMedicament type) {
+    public Medicament(Integer id, String nom, double prix, int qteStock, String description, TypeMedicament type) {
         this.id = id;
         this.nom = nom;
         this.prix = prix;
@@ -25,12 +20,11 @@ public class Medicament {
         this.type = type;
     }
 
-    // getters and setters
-
-
     public Integer getId() {
         return id;
     }
+
+    // getters and setters
 
     public void setId(Integer id) {
         this.id = id;
@@ -80,5 +74,10 @@ public class Medicament {
     public String toString() {
         return "Id : " + id + " Nom : " + nom + " Prix : " + prix + " QteStock : " + qteStock + " Description : " + description + " Type : " + type;
 
+    }
+
+    public enum TypeMedicament {
+        SPECIAL,
+        NORMAL
     }
 }

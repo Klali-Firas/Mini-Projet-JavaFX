@@ -10,14 +10,14 @@ public class UserDAO {
 
     public static User login(String login, String password) {
         String query = "SELECT * FROM users WHERE login = ?";
-        User user ;
+        User user;
         try {
             java.sql.PreparedStatement ps = con.prepareStatement(query);
             ps.setString(1, login);
             java.sql.ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                user= new User(rs.getInt("id"), rs.getString("username"), rs.getString("password"), rs.getString("login"), rs.getInt("telephone"));
-                if(BCrypt.checkpw(password, user.getPassword())){
+                user = new User(rs.getInt("id"), rs.getString("username"), rs.getString("password"), rs.getString("login"), rs.getInt("telephone"));
+                if (BCrypt.checkpw(password, user.getPassword())) {
                     return user;
                 }
             }

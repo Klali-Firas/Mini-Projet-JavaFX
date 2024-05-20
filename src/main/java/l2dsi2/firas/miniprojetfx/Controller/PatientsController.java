@@ -6,8 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import l2dsi2.firas.miniprojetfx.DAO.PatientDao;
@@ -32,10 +30,29 @@ public class PatientsController implements Initializable {
     private TableColumn<Patient, String> birthdayCol;
 
     @FXML
+    private Button medicaments;
+
+    @FXML
     private Button addPatient;
+
+    @FXML
+    private Button addAdmin;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        addAdmin.setOnAction(event -> {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/l2dsi2/firas/miniprojetfx/AddAdmin.fxml"));
+                Scene scene = new Scene(fxmlLoader.load());
+                Stage stage = (Stage) addAdmin.getScene().getWindow();
+                stage.setTitle("Add Admin");
+                stage.setScene(scene);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        medicaments.setOnAction(event -> openMedicamentsScene());
+
         patients = PatientDao.getAllPatients();
         nomCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNom()));
         prenomCol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPrenom()));
@@ -79,18 +96,19 @@ public class PatientsController implements Initializable {
             return row;
         });
         patientsTable.setOnMouseClicked(event -> {
-    if (event.getClickCount() == 2 && patientsTable.getSelectionModel().getSelectedItem() != null) { // Checking double click
-        openUpdateDialog(patientsTable.getSelectionModel().getSelectedItem());
-        patientsTable.refresh();
-    }
+            if (event.getClickCount() == 2 && patientsTable.getSelectionModel().getSelectedItem() != null) { // Checking double click
+                openUpdateDialog(patientsTable.getSelectionModel().getSelectedItem());
+                patientsTable.refresh();
+            }
 
-});
+        });
         addPatient.setOnAction(event -> {
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/l2dsi2/firas/miniprojetfx/AddPatient.fxml"));
                 Scene scene = new Scene(fxmlLoader.load());
                 Stage stage = new Stage();
                 stage.initModality(Modality.APPLICATION_MODAL);
+                stage.setTitle("Add Patient");
                 stage.setScene(scene);
                 stage.showAndWait();
                 patients = PatientDao.getAllPatients(); // Fetch the updated list of patients
@@ -106,11 +124,12 @@ public class PatientsController implements Initializable {
         MenuItem medicamentsItem = new MenuItem("Medicaments");
         medicamentsItem.setOnAction(event -> {
             try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/l2dsi2/firas/miniprojetfx/Medicaments.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/l2dsi2/firas/miniprojetfx/PatientMedicaments.fxml"));
                 Scene scene = new Scene(fxmlLoader.load()); // Load the scene first
-                MedicamentsController medicamentsController = fxmlLoader.getController(); // Then get the controller
-                medicamentsController.setPatient(row.getItem()); // set the patient
+                PatientMedicamentsController patientMedicamentsController = fxmlLoader.getController(); // Then get the controller
+                patientMedicamentsController.setPatient(row.getItem()); // set the patient
                 Stage stage = (Stage) patientsTable.getScene().getWindow();
+                stage.setTitle("Medicaments");
                 stage.setScene(scene);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -125,6 +144,7 @@ public class PatientsController implements Initializable {
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Update Patient");
             stage.setScene(scene);
             UpdatePatientController controller = fxmlLoader.getController();
             controller.setPatient(patient);
@@ -137,5 +157,17 @@ public class PatientsController implements Initializable {
     private void deletePatient(Patient patient) {
         PatientDao.deletePatient(patient.getId());
         patientsTable.getItems().remove(patient);
+    }
+
+    private void openMedicamentsScene() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/l2dsi2/firas/miniprojetfx/Medicaments.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = (Stage) medicaments.getScene().getWindow();
+            stage.setTitle("Medicaments");
+            stage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

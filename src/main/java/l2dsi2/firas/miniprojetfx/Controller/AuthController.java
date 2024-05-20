@@ -1,23 +1,17 @@
 package l2dsi2.firas.miniprojetfx.Controller;
 
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import l2dsi2.firas.miniprojetfx.DAO.UserDAO;
 import l2dsi2.firas.miniprojetfx.Model.User;
-import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Date;
 import java.util.ResourceBundle;
 
 public class AuthController implements Initializable {
@@ -29,17 +23,32 @@ public class AuthController implements Initializable {
     @FXML
     private TextField loginInput;
     @FXML
-    private TextField passInput;
+    private PasswordField passInput;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        loginInput.setText("firas@gmail.com");
+        passInput.setText("aze.1234");
     }
 
     @FXML
+
     protected void login(ActionEvent event) {
-        user = UserDAO.login(loginInput.getText(), passInput.getText());
-//        System.out.println(BCrypt.hashpw("aze.1234", BCrypt.gensalt()));
+        String login = loginInput.getText();
+        String password = passInput.getText();
+
+        // Check if any field is empty
+        if (login.isEmpty() || password.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("All fields must be filled");
+            alert.showAndWait();
+            return;
+        }
+
+        user = UserDAO.login(login, password);
         if (user != null) {
             Alert dia = new Alert(Alert.AlertType.INFORMATION);
             dia.setTitle("Authentification");
@@ -50,6 +59,7 @@ public class AuthController implements Initializable {
             try {
                 // Set the new scene
                 Stage stage = (Stage) loginButton.getScene().getWindow();
+                stage.setTitle("Phamacie App");
                 stage.setScene(new Scene(fxmlLoader.load()));
             } catch (IOException e) {
                 e.printStackTrace();
@@ -62,9 +72,6 @@ public class AuthController implements Initializable {
             dia.show();
         }
     }
-
-
-
 
 
 }
